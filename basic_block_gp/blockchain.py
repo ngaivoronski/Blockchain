@@ -33,6 +33,7 @@ class Blockchain(object):
             block_string = json.dumps(self.last_block, sort_keys=True)
             guess = f'{block_string}{proof}'.encode()
             current_hash = hashlib.sha256(guess).hexdigest()
+            print(guess)
         else:
             current_hash = ""
         
