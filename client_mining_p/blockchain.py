@@ -38,6 +38,11 @@ class Blockchain(object):
         else:
             current_hash = ""
         
+        if len(self.chain) > 0:
+            time_since_last = time() - self.last_block['timestamp']
+        else:
+            time_since_last = 0
+
         block = {
             'index': len(self.chain) + 1,
             'timestamp': time(),
@@ -45,7 +50,8 @@ class Blockchain(object):
             'proof': proof,
             # if you pass in a previous hash (genisis block) use that, otherwise, use the last block
             'previous_hash': previous_hash or self.hash(self.last_block),
-            'hash': current_hash
+            'hash': current_hash,
+            "time_since_last_proof": time_since_last
         }
 
         # Reset the current list of transactions
